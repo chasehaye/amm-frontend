@@ -1,0 +1,5 @@
+"scripts": {
+  "start": "vite preview",
+  "build": "vite build",
+  "heroku-postbuild": "npm run build"
+}
