@@ -2,7 +2,8 @@ import * as userAPI from './user-api';
 
 export async function register(userData) {
   // register a user
-   const token = await userAPI.register(userData);
+  removeCookie('jwt')
+  const token = await userAPI.register(userData);
   return getUser();
 }
 
@@ -39,6 +40,7 @@ export async function logOut() {
 }
 
 export async function login(credentials) {
+  removeCookie('jwt')
   const token = await userAPI.login(credentials);
   return getUser();
 }
