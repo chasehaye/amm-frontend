@@ -1,0 +1,104 @@
+
+# HERE DEPLOY/DEV RELATED 
+
+# Static files
+staticfiles/
+static/
+staticfiles/
+
+Procfile
+requirements.txt
+
+
+# END DEPLOY/DEV RELATED 
+
+
+
+
+
+
+
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+djangoenv/
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Django stuff
+*.log
+local_settings.py
+
+# Translations
+*.mo
+*.pot
+
+
+# Media files
+media/
+
+# Jupyter Notebook
+.ipynb_checkpoints
+
+# PyCharm
+.idea/
+
+# VSCode
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Visual Studio
+.vscode/
+.vscode/*
+*.code-workspace
+
+# Anaconda
+.conda/
+
+# Migrations should be included in version control, so no need to ignore them
+migrations/
+migrations/*
+
+# Ignore local environment settings
+.env
+
+#react related ignores
+node_modules/
+
+
+
