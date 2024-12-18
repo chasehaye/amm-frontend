@@ -5,10 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "start": "vite preview",
     "build": "vite build",
+    "heroku-postbuild": "npm run build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview",
-    "heroku-postbuild": "npm install && npm run build"
+    "preview": "vite preview"
   },
   "dependencies": {
     "aws-sdk": "^2.1692.0",
