@@ -1,16 +1,16 @@
 ### DEPLOYMENT INSTRUCTIONS ###
 
-AWS handling -
 
 ## FOR DEPLOTMENT ##
 
-1. change base
+1. change server to proxy inside of vite.config
 
 
 
 ## FOR DEV ##
 
-1. set DEBUG = True
+1. change server to proxy inside of vite.config
+
 
 
 

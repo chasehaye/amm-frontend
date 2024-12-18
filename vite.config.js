@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'http://localhost:8000', // Django development server URL
+        target: 'http://amm-190a5f09af12.herokuapp.com/', // Django development server URL
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
