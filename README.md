@@ -22,20 +22,26 @@
 
 
 # Development notes
-
-
-    
-        consider pagifying through useffect the indexing of data
         
+
+
+
         for update and create handle the self issue regarding link display, thinking just parse it out on front
         
 
-        Have log in and register clear any remaing cookies so there are no conflicts cookies
-
         revise how the form looks
 
-        
 
-        super user script on deployment?
 
-        postgres amazon and aws
+
+        consider data limitations with json what are some alternatives
+
+        work on loading and pagifying the applocation
+
+        consider optimizing for speed
+
+        spend time writing up documents
+
+        (can be done from anywhere)
+
+        compressing data to be sent?
