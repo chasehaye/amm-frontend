@@ -53,7 +53,7 @@ function AnimeItemDetail({anime, setAnime}){
 
     // genre related logic
     const [genres, setGenres] = useState([]);
-    const [selectedGenres, setSelectedGenres] = useState(anime.genre);
+    const [selectedGenres, setSelectedGenres] = useState([]);
     const handleGenreChange = (genre) => {
         setSelectedGenres((prevSelectedGenres) =>
             prevSelectedGenres.includes(genre)
@@ -61,25 +61,31 @@ function AnimeItemDetail({anime, setAnime}){
                 : [...prevSelectedGenres, genre]
         );
     };
-
-    useEffect (() => {
+    useEffect(() => {
         const fetchGenres = async () => {
-            try{
-                const genres = await indexGenre();
-                setGenres(genres);
-            }catch{
+            try {
+                const fetchedGenres = await indexGenre();
+                setGenres(fetchedGenres);
+                const selectedGenreNames = fetchedGenres
+                .filter((genre) => anime.genre.includes(genre.name))
+                .map((genre) => genre.name);
+                setSelectedGenres(selectedGenreNames);
+            } catch {
                 console.log("Failed to fetch genres");
             }
         };
+      
+        fetchGenres();
+    }, [anime.genre]);
+    useEffect(() => {
         const fetchStudios = async () => {
-            try{
+            try {
                 const studios = await indexStudio();
                 setStudios(studios);
-            }catch{
+            } catch {
                 console.log("Failed to fetch studios");
             }
         };
-        fetchGenres();
         fetchStudios();
     }, []);
 
@@ -219,8 +225,8 @@ function AnimeItemDetail({anime, setAnime}){
         if (titleJpKanjiRef.current.value) updatedAnime.titleJpKanji = titleJpKanjiRef.current.value;
         if (descriptionRef.current.value) updatedAnime.description = descriptionRef.current.value;
         if (type) updatedAnime.type = type;
-        if (episodesRef.current.value) updatedAnime.episodes = episodesRef.current.value;
-        if (episodeDurationRef.current.value) updatedAnime.episodeDuration = episodeDurationRef.current.value;
+        if (episodesRef.current.value) updatedAnime.episodes = parseInt(episodesRef.current.value, 10);
+        if (episodeDurationRef.current.value) updatedAnime.episodeDuration = parseInt(episodeDurationRef.current.value, 10);
         if (premiereSeason) updatedAnime.premiereSeason = premiereSeason;
         if (demographic) updatedAnime.demographic = demographic;
         if (formattedAirDate) updatedAnime.airDate = formattedAirDate;
@@ -230,7 +236,6 @@ function AnimeItemDetail({anime, setAnime}){
         if (selectedStudio) updatedAnime.studio = selectedStudio;
         if (selectedGenres.length > 0) updatedAnime.genre = selectedGenres;
         try{
-            console.log(updatedAnime);
             const newAnime = await updateAnime(anime.id, updatedAnime, imageFile);
             setAnime(newAnime);
             navigate("/admin/home");

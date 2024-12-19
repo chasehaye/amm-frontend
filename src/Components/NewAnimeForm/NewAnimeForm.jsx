@@ -194,23 +194,25 @@ const NewAnimeForm = () => {
 
         
 
-        const newAnime = {created_by: user.id};
+        const newAnime = {created_by: user.id,};
 
-        if (titleEnglishRef.current.value) newAnime.titleEnglish = titleEnglishRef.current.value;
-        if (titleJpRomanRef.current.value) newAnime.titleJpRoman = titleJpRomanRef.current.value;
-        if (titleJpKanjiRef.current.value) newAnime.titleJpKanji = titleJpKanjiRef.current.value;
-        if (descriptionRef.current.value) newAnime.description = descriptionRef.current.value;
+        if (titleEnglishRef.current.value) newAnime.titleEnglish = titleEnglishRef.current.value.trim();
+        if (titleJpRomanRef.current.value) newAnime.titleJpRoman = titleJpRomanRef.current.value.trim();
+        if (titleJpKanjiRef.current.value) newAnime.titleJpKanji = titleJpKanjiRef.current.value.trim();
+        if (descriptionRef.current.value) newAnime.description = descriptionRef.current.value.trim();
         if (type) newAnime.type = type;
-        if (episodesRef.current.value) newAnime.episodes = episodesRef.current.value;
-        if (episodeDurationRef.current.value) newAnime.episodeDuration = episodeDurationRef.current.value;
-        if (premiereSeason) newAnime.premiereSeason = premiereSeason;
-        if (demographic) newAnime.demographic = demographic;
-        if (formattedAirDate) newAnime.airDate = formattedAirDate;
-        if (formattedEndDate) newAnime.endDate = formattedEndDate;
-        if (prequel) newAnime.prequel = prequel.id;
-        if (sequel) newAnime.sequel = sequel.id;
-        if (selectedStudio) newAnime.studio = selectedStudio;
-        if (selectedGenres.length > 0) newAnime.genre = selectedGenres;
+        if (episodesRef.current.value) newAnime.episodes = parseInt(episodesRef.current.value, 10); // Convert to integer
+        if (episodeDurationRef.current.value) newAnime.episodeDuration = parseInt(episodeDurationRef.current.value, 10); // Convert to integer
+        if (premiereSeason) newAnime.premiereSeason = premiereSeason.trim(); // Valid string
+        if (demographic) newAnime.demographic = demographic.trim(); // Valid string
+        if (formattedAirDate) newAnime.airDate = formattedAirDate; // Ensure 'YYYY-MM-DD' format
+        if (formattedEndDate) newAnime.endDate = formattedEndDate; // Ensure 'YYYY-MM-DD' format
+        if (prequel) newAnime.prequel = prequel.id; // Integer
+        if (sequel) newAnime.sequel = sequel.id; // Integer
+        if (selectedStudio) newAnime.studio = selectedStudio.trim(); // Valid string
+        if (selectedGenres.length > 0) {
+            newAnime.genre = selectedGenres.map((genre) => genre.toString().trim()); // Array of strings
+        }
         try{
             const newAnimeCallResponse = await createNewAnime(newAnime, imageFile);
             navigate("/admin/home");
