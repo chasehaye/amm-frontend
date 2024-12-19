@@ -1,5 +1,6 @@
 import { getToken } from './user-service';
 
+
 export default async function sendRequest(url, method = 'GET', payload = null, queryParameters = {}) {
 
   if (Object.keys(queryParameters).length > 0) {
@@ -7,7 +8,7 @@ export default async function sendRequest(url, method = 'GET', payload = null, q
     url = `${url}?${queryString}`;
   }
 
-  const options = { method };
+  const options = { method, credentials: 'include' };
 
 
   if (payload) {
@@ -26,8 +27,19 @@ export default async function sendRequest(url, method = 'GET', payload = null, q
     options.headers = options.headers || {};
     options.headers.Authorization = `Bearer ${token}`;
   }
-  console.log(url)
-  const res = await fetch(url, options);
-  if (res.ok) return res.json();
-  throw new Error('Bad Request');
+
+
+  const cleanedUrl = url.replace(/^\/api/, '');
+  const fullUrl = `${import.meta.env.VITE_API_URL}${cleanedUrl}`;
+  console.log(fullUrl)
+
+
+  const res = await fetch(fullUrl, options);
+  console.log('Response status:', res.status);
+  if (res.ok) {
+    return res.json();
+  } else {
+    console.error('Error response:', await res.text()); // Log the error response
+    throw new Error('Bad Request');
+  }
 }

@@ -3,13 +3,15 @@
 
 ## FOR DEPLOTMENT ##
 
-1. change server to proxy inside of vite.config
+1. change server to proxy
+2. deploy using heroku steps
 
 
 
 ## FOR DEV ##
 
-1. change server to proxy inside of vite.config
+1. change server to proxy
+
 
 
 

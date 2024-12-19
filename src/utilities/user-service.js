@@ -2,8 +2,8 @@ import * as userAPI from './user-api';
 
 export async function register(userData) {
   // register a user
-  removeCookie('jwt')
   const token = await userAPI.register(userData);
+  setCookie('jwt', token.jwt);
   return getUser();
 }
 
@@ -30,7 +30,6 @@ export async function getUser() {
     const userData = await userAPI.grabUser();
     return userData;
   } catch (err) {
-    console.error('Error fetching user:', err);
     return null;
   }
 }
@@ -40,8 +39,8 @@ export async function logOut() {
 }
 
 export async function login(credentials) {
-  removeCookie('jwt')
   const token = await userAPI.login(credentials);
+  setCookie('jwt', token.jwt);
   return getUser();
 }
 
@@ -50,7 +49,6 @@ export async function adminVerify(){
     const adminStatus = await userAPI.adminVerify();
     return adminStatus;
   } catch (err) {
-    console.error('Error fetching user:', err);
     return false;
   }
 }
@@ -63,4 +61,10 @@ function getCookie(name) {
 
 function removeCookie(name) {
   document.cookie = `${name}=; Max-Age=0; path=/;`;
+}
+
+function setCookie(name, value, hours = 24) {
+  const expires = new Date();
+  expires.setTime(expires.getTime() + (hours * 60 * 60 * 1000));
+  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;Secure;SameSite=None;`;
 }
