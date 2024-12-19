@@ -3,25 +3,35 @@ import * as userAPI from './user-api';
 export async function register(userData) {
   // register a user
   const token = await userAPI.register(userData);
-  setCookie('jwt', token.jwt);
+  saveToken(token);
   return getUser();
 }
 
 export async function getToken() {
   //grab token
-  const token = getCookie('jwt');
+
+  const token = localStorage.getItem('jwt');
   //validate token
   if (!token) return null;
   // pull token exp
-  const payload = JSON.parse(atob(token.split('.')[1]));
-  //validate exp
-  if (payload.exp < Date.now() / 1000) {
-    // if not valid remove token
-    removeCookie('jwt');
+  try {
+    // Decode and parse the payload
+    const payload = JSON.parse(atob(token.split('.')[1]));
+    
+    // Check the expiration time and validate
+    if (payload.exp < Date.now() / 1000) {
+      // If expired, remove the token and return null
+      removeToken();
+      return null;
+    }
+
+    // If valid, return the token
+    return token;
+  } catch (error) {
+    // In case of any errors (malformed token, JSON parsing, etc.), clear the token
+    removeToken();
     return null;
   }
-  // if is valid return
-  return token;
 }
 
 export async function getUser() {
@@ -35,12 +45,14 @@ export async function getUser() {
 }
 
 export async function logOut() {
-  removeCookie('jwt')
+  console.log('making call here')
+  await userAPI.logOut();
+  removeToken();
 }
 
 export async function login(credentials) {
   const token = await userAPI.login(credentials);
-  setCookie('jwt', token.jwt);
+  saveToken(token.jwt);
   return getUser();
 }
 
@@ -53,18 +65,10 @@ export async function adminVerify(){
   }
 }
 
-function getCookie(name) {
-  const value = `; ${document.cookie}`;
-  const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
+function saveToken(token) {
+  localStorage.setItem('jwt', token);
 }
 
-function removeCookie(name) {
-  document.cookie = `${name}=; Max-Age=0; path=/;`;
-}
-
-function setCookie(name, value, hours = 24) {
-  const expires = new Date();
-  expires.setTime(expires.getTime() + (hours * 60 * 60 * 1000));
-  document.cookie = `${name}=${value};expires=${expires.toUTCString()};path=/;Secure;SameSite=None;`;
+function removeToken() {
+  localStorage.removeItem('jwt');
 }

@@ -1,12 +1,13 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { adminVerify, grabUser, logOut as apiLogOut } from './utilities/user-api';
+import { adminVerify, grabUser } from './utilities/user-api';
+import { logOut as tokenRemovalAndCall } from './utilities/user-service';
 
 const UserContext = createContext();
 
 const UserProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [admin, setAdmin] = useState(null);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -47,23 +48,17 @@ const UserProvider = ({ children }) => {
 
     const logOut = async () => {
         try {
-            await apiLogOut();
+            await tokenRemovalAndCall();
+            
         } catch (err) {
             console.error('Error logging out:', err);
         } finally {
             setUser(null);
             setAdmin(null);
-            window.location.reload();
+            setLoading(false);
+            // window.location.reload();
         }
     };
-
-    useEffect(() => {
-        if (user !== null && admin !== null) {
-          setLoading(false);
-        }else if (user === null && admin === null) {
-            setLoading(false);
-        }
-      }, [user, admin]);
 
     return (
         <UserContext.Provider value={{ user, admin, setUser, logOut, loading }}>
