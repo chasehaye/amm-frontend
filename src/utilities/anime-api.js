@@ -10,7 +10,6 @@ export function indexOrder(queryParameters){
 }   
 
 export function createNewAnime(animeData, imageFile){
-    console.log(animeData)
     const formData = new FormData();
     if (imageFile) {
         formData.append('image', imageFile);
