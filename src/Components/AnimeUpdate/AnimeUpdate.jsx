@@ -267,7 +267,7 @@ function AnimeItemDetail({anime, setAnime}){
                             <input placeholder="Japanese Title" type="text" ref={titleJpKanjiRef} defaultValue={anime.titleJpKanji} className="px-2 py-1 text-c1 px-1 mb-2"/>
                         </div>
                     </div>
-                    <div className="mt-10">
+                    <div className="">
                         <div className="flex flex-col mb-2">
                             <label className="mb-1" htmlFor="air-date">Air Date: </label>
                             <DatePicker
@@ -289,8 +289,8 @@ function AnimeItemDetail({anime, setAnime}){
                             />
                         </div>
                     </div>
-                    <div className="flex flex-col ml-2 mt-8 ml-20">
-                        <div className="mx-auto">
+                    <div className="flex ml-2 ml-20">
+                        <div className="mx-auto mt-7">
                             <input
                                 type="file"
                                 name="image"
@@ -300,16 +300,16 @@ function AnimeItemDetail({anime, setAnime}){
                                 className="w-52 mb-2"
                             />
                         </div>
-                        <div className="relative mx-auto w-[87px] h-[123px]">
+                        <div className="relative mx-auto w-[174px] h-[246px] ml-16 mt-7">
                                 {imagePreview ? (
                                     <>
                                         <img
                                             src={imagePreview}
                                             alt="Preview"
                                             onClick={handleFileRemove}
-                                            className="w-[87px] h-[123px] cursor-pointer"
+                                            className="w-[174px] h-[246px] cursor-pointer"
                                         />
-                                        <div className="cursor-pointer absolute top-0 right-0 w-[87px] h-[123px] flex justify-center items-center text-c2 text-6xl opacity-0 hover:opacity-100" onClick={handleFileRemove}>
+                                        <div className="cursor-pointer absolute top-0 right-0 w-[174px] h-[246px] flex justify-center items-center text-c2 text-6xl opacity-0 hover:opacity-100" onClick={handleFileRemove}>
                                             X
                                         </div>
                                     </>
@@ -320,7 +320,7 @@ function AnimeItemDetail({anime, setAnime}){
                     </div>
                 </div>
 
-                <div className="flex flex-col w-[50vw] mx-20">
+                <div className="flex flex-col w-[40vw] mx-20">
                     <label className="mb-1" htmlFor="">Description/Synopsis: </label>
                     <textarea 
                         id="description" 
@@ -345,20 +345,20 @@ function AnimeItemDetail({anime, setAnime}){
                     <div className="flex flex-col mx-4 mb-4">
                         <div className="flex flex-col justify-center items-center mb-2"><span>Select</span><span>Type</span></div>
                         <div 
-                            onClick={() => setType('TV')} 
-                            className={`mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center py-2 w-20 ${type === 'TV' ? 'bg-c2 text-c6' : ''}`}
+                            onClick={() => setType(type === 'TV' ? null : 'TV')} 
+                            className={`select-none mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center py-2 w-20 ${type === 'TV' ? 'bg-c2 text-c6' : ''}`}
                         >
                             TV
                         </div>
                         <div 
-                            onClick={() => setType('Movie')} 
-                            className={`mb-2 no-select cursor-pointer border-t border-l border-c4 flex justify-center items-center px-4 py-2 w-20 ${type === 'Movie' ? 'bg-c2 text-c6' : ''}`}
+                            onClick={() => setType(type === 'Movie' ? null : 'Movie')} 
+                            className={`select-none mb-2 no-select cursor-pointer border-t border-l border-c4 flex justify-center items-center px-4 py-2 w-20 ${type === 'Movie' ? 'bg-c2 text-c6' : ''}`}
                         >
                             Movie
                         </div>
                         <div 
-                            onClick={() => setType('OVA')} 
-                            className={`mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center px-4 py-2 w-20 ${type === 'OVA' ? 'bg-c2 text-c6' : ''}`}
+                            onClick={() => setType(type === 'OVA' ? null : 'OVA')}
+                            className={`select-none mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center px-4 py-2 w-20 ${type === 'OVA' ? 'bg-c2 text-c6' : ''}`}
                         >
                             OVA
                         </div>
@@ -366,26 +366,26 @@ function AnimeItemDetail({anime, setAnime}){
                     <div className="flex flex-col mx-4 mb-4">
                         <div className="flex flex-col justify-center items-center mb-2"><span>Select</span><span>Demographic</span></div>
                             <div 
-                                onClick={() => setDemographic('Shounen')} 
-                                className={`mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center py-2 w-24 ${demographic === 'Shounen' ? 'bg-c2 text-c6' : ''}`}
+                                onClick={() => setDemographic(demographic === 'Shounen' ? null : 'Shounen')}
+                                className={`select-none mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center py-2 w-24 ${demographic === 'Shounen' ? 'bg-c2 text-c6' : ''}`}
                             >
                                 Shounen
                             </div>
                             <div 
-                                onClick={() => setDemographic('Seinen')} 
-                                className={`mb-2 no-select cursor-pointer border-t border-l border-c4 flex justify-center items-center px-4 py-2 w-24 ${demographic === 'Seinen' ? 'bg-c2 text-c6' : ''}`}
+                                onClick={() => setDemographic(demographic === 'Seinen' ? null : 'Seinen')}
+                                className={`select-none mb-2 no-select cursor-pointer border-t border-l border-c4 flex justify-center items-center px-4 py-2 w-24 ${demographic === 'Seinen' ? 'bg-c2 text-c6' : ''}`}
                             >
                                 Seinen
                             </div>
                             <div 
-                                onClick={() => setDemographic('Shoujo')} 
-                                className={`mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center px-4 py-2 w-24 ${demographic === 'Shoujo' ? 'bg-c2 text-c6' : ''}`}
+                                onClick={() => setDemographic(demographic === 'Shoujo' ? null : 'Shoujo')}  
+                                className={`select-none mb-2 no-select cursor-pointer border-t border-r border-c4 flex justify-center items-center px-4 py-2 w-24 ${demographic === 'Shoujo' ? 'bg-c2 text-c6' : ''}`}
                             >
                                 Shoujo
                             </div>
                             <div 
-                                onClick={() => setDemographic('Josei')} 
-                                className={`mb-2 no-select cursor-pointer border-t border-l border-c4 flex justify-center items-center px-4 py-2 w-24 ${demographic === 'Josei' ? 'bg-c2 text-c6' : ''}`}
+                                onClick={() => setDemographic(demographic === 'Josei' ? null : 'Josei')}
+                                className={`select-none mb-2 no-select cursor-pointer border-t border-l border-c4 flex justify-center items-center px-4 py-2 w-24 ${demographic === 'Josei' ? 'bg-c2 text-c6' : ''}`}
                             >
                                 Josei
                             </div>
@@ -442,7 +442,7 @@ function AnimeItemDetail({anime, setAnime}){
                             {genres.map((genre) => (
                             <div
                             key={genre.id}
-                            className={`flex space-x-1 cursor-pointer mb-1 ${
+                            className={`select-none flex space-x-1 cursor-pointer mb-1 ${
                                 selectedGenres.includes(genre.name)
                                 ? "bg-c2 text-c6" 
                                 : "border-b border-l border-c4"
@@ -460,12 +460,12 @@ function AnimeItemDetail({anime, setAnime}){
                             {studios.map((studio) => (
                                 <div
                                 key={studio.id}
-                                className={`flex space-x-1 cursor-pointer mb-1 ${
+                                className={`select-none flex space-x-1 cursor-pointer mb-1 ${
                                     selectedStudio === studio.name
                                     ? "bg-c2 text-c6"
                                     : "border-b border-l border-c4"
                                 } p-2`}
-                                onClick={() => setSelectedStudio(studio.name)}
+                                onClick={() => setSelectedStudio(selectedStudio === studio.name ? null : studio.name)}
                                 >
                                 <span>{studio.name || "No studio available"}</span>
                                 </div>

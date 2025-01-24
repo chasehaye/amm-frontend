@@ -11,12 +11,23 @@ export function indexOrder(queryParameters){
 
 export function createNewAnime(animeData, imageFile){
     const formData = new FormData();
+
+    if(animeData.genre && Array.isArray(animeData.genre)){
+        animeData.genre.forEach(genre => {
+            formData.append('genre', genre);
+        });
+    }else{
+        formData.append('genre', animeData.genre);
+    }
+    Object.keys(animeData).forEach((key) => {
+        if (key !== 'genre') {
+            formData.append(key, animeData[key]);
+        }
+    });
+
     if (imageFile) {
         formData.append('image', imageFile);
     }
-    Object.keys(animeData).forEach((key) => {
-        formData.append(key, animeData[key]);
-    });
     if (!imageFile) {
         return sendRequest(`${BASE_URL}/create`, 'POST', animeData);
     }
@@ -38,12 +49,23 @@ export function deleteAnimeRequest(animeId){
 
 export function updateAnime(animeId, animeData, imageFile){
     const formData = new FormData();
+
+    if(animeData.genre && Array.isArray(animeData.genre)){
+        animeData.genre.forEach(genre => {
+            formData.append('genre', genre);
+        });
+    }else{
+        formData.append('genre', animeData.genre);
+    }
+    Object.keys(animeData).forEach((key) => {
+        if (key !== 'genre') {
+            formData.append(key, animeData[key]);
+        }
+    });
+
     if (imageFile) {
         formData.append('image', imageFile);
     }
-    Object.keys(animeData).forEach((key) => {
-        formData.append(key, animeData[key]);
-    });
     if (!imageFile) {
         return sendRequest(`${BASE_URL}/${animeId}/update`, 'PUT', animeData);
     }

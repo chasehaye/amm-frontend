@@ -53,10 +53,16 @@ function AddStudioPage() {
         fetchStudios();
     };
 
+    const [hovered, setHovered] = useState(false);
+    
+
     return(
         <>
-            <Link className="mt-4 flex justify-center items-center mb-2 border-x border-c4 w-40 mx-auto py-2 cursor-pointer hover:bg-c2" to="/admin/home">
-                Studio Control
+            <Link className="mt-4 flex justify-center items-center mb-2 border-x border-c4 w-40 mx-auto py-2 cursor-pointer hover:bg-c2" to="/admin/home"
+                onMouseEnter={() => setHovered(true)} 
+                onMouseLeave={() => setHovered(false)}
+            >
+                {hovered ? 'Return' : 'Studio Control'}
             </Link>
             <NewStudioForm onStudioAdded={handleStudioAdded}/>
             <div className="mx-auto w-full flex flex-col justify-center items-center">

@@ -10,6 +10,7 @@
   --c5: #c3c3c3;
   --c6: #1a1714;
   --c7: #c6ad7f;
+  --c8: #D3D3D3;
 }
 
 html {
@@ -66,11 +67,11 @@ select option:hover {
 }
 
 input {
-  background-color: var(--c7);
+  background-color: var(--c8);
   color: var(--c1) !important;
 }
 textarea {
-  background-color: var(--c7);
+  background-color: var(--c8);
   color: var(--c1) !important;
 }
 input::placeholder,
@@ -83,17 +84,17 @@ textarea::placeholder {
 
 /* Change background color of react-select input control */
 .react-select__control {
-  background-color: var(--c7) !important; /* Replace with your desired background color */
+  background-color: var(--c8) !important; /* Replace with your desired background color */
 }
 
 /* Change border color of react-select input control on focus */
 .react-select__control--is-focused {
-  border-color: var(--c7) !important; /* Replace with your desired border color */
+  border-color: var(--c8) !important; /* Replace with your desired border color */
 }
 
 /* Change the background color of react-select dropdown */
 .react-select__menu {
-  background-color: var(--c7) !important; /* Replace with your desired dropdown background color */
+  background-color: var(--c8) !important; /* Replace with your desired dropdown background color */
 }
 
 /* Change the text color of react-select placeholder */
@@ -103,13 +104,13 @@ textarea::placeholder {
 
 /* Change the color of selected option in the dropdown */
 .react-select__option--is-selected {
-  background-color: var(--c6) !important; /* Replace with your desired selected option background color */
+  background-color: var(--c3) !important; /* Replace with your desired selected option background color */
   color: var(--c6) !important; /* Replace with your desired selected option text color */
 }
 
 /* Change the hover color of options in the dropdown */
 .react-select__option--is-focused {
-  background-color: var(--c2) !important; /* Replace with your desired hover option background color */
+  background-color: var(--c4) !important; /* Replace with your desired hover option background color */
   color: var(--c1) !important; /* Replace with your desired hover option text color */
 }
 
