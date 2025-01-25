@@ -25,7 +25,7 @@ function NewStudioForm({onStudioAdded}) {
         }
         try{
             const newStudioResponse = await createNewStudio(newStudio);
-            console.log(newStudioResponse)
+            onStudioAdded();
             studioNameRef.current.value = '';
             websiteRef.current.value = '';
             setEstablishedDate(null);
