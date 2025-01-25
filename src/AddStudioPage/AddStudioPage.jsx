@@ -84,7 +84,7 @@ function AddStudioPage() {
                         ))}
                     </div>
                 ) : (
-                    <p>Loading studios...</p>
+                    <div class="loader2"></div>
                 )}
             </div>
 

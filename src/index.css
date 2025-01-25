@@ -139,3 +139,34 @@ textarea::placeholder {
 
 
 /* #3E362E\#865D36\#93785B\#AC8968\#A69080 */
+
+/* HTML: <div class="loader"></div> */
+.loade2 {
+  width: 50px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  padding: 6px;
+  background:
+    conic-gradient(from 135deg at top,currentColor 90deg, #0000 0) 0 calc(50% - 4px)/17px 8.5px,
+    radial-gradient(farthest-side at bottom left,#0000 calc(100% - 6px),currentColor calc(100% - 5px) 99%,#0000) top right/50%  50% content-box content-box,
+    radial-gradient(farthest-side at top        ,#0000 calc(100% - 6px),currentColor calc(100% - 5px) 99%,#0000) bottom   /100% 50% content-box content-box;
+  background-repeat: no-repeat;
+  animation: l11 1s infinite linear;
+}
+@keyframes l11{ 
+  100%{transform: rotate(1turn)}
+}
+
+/* HTML: <div class="loader2"></div> */
+/* HTML: <div class="loader"></div> */
+.loader {
+  width: 120px;
+  height: 2.5rem;
+  background:
+   linear-gradient(var(--c2) 0 0) 0/0% no-repeat
+   var(--c1);
+  animation: l1 1s infinite linear;
+}
+@keyframes l1 {
+    100% {background-size:100%}
+}

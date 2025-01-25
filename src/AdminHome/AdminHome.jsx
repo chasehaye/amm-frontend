@@ -4,11 +4,13 @@ import AnimeList from "../Components/AdminList/AdminList";
 
 function AdminHomePage() {
 
+    const [loading, setLoading] = useState(false);
     
 
     return(
         <>
             <AdminNav />
+            {!loading}
             <AnimeList />
             
         </>

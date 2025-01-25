@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import NewGenreForm from "./NewGenreForm/NewGenreForm";
 import { indexGenre,deleteGenre } from "../utilities/anime-api";
 import { Link } from "react-router-dom";
+import '../index.css';
 
 function AddGenrePage() {
     const [error, setError] = useState(null);
@@ -16,7 +17,6 @@ function AddGenrePage() {
             const genresResponse = await indexGenre();
             setGenres(genresResponse);
         } catch (err) {
-            setError('Failed to load');
         }
     };
 
@@ -59,6 +59,8 @@ function AddGenrePage() {
 
     return(
         <>
+
+
             <Link className="mt-4 flex justify-center items-center mb-2 border-x border-c4 w-40 mx-auto py-2 cursor-pointer hover:bg-c2" to="/admin/home"
                 onMouseEnter={() => setHovered(true)} 
                 onMouseLeave={() => setHovered(false)}
@@ -69,7 +71,7 @@ function AddGenrePage() {
             <div className="mx-auto w-full flex flex-col justify-center items-center">
                 {error && <p className="mb-2">{error}</p>}
                 {genres ? (
-                    <div className="flex flex-wrap">
+                    <div className="flex flex-wrap mx-10">
                         {genres.map((genre, index) => (
                             <div key={index} className="m-2 border-b border-c4 flex pl-1">
                                 <div className="min-w-10 px-1 flex justify-center items-center  whitespace-nowrap">
@@ -85,7 +87,7 @@ function AddGenrePage() {
                         ))}
                     </div>
                 ) : (
-                    <p>Loading genres...</p>
+                    <div class="loader2"></div>
                 )}
             </div>
 
