@@ -46,7 +46,7 @@ function AnimeItemPage() {
     return (
         <>
             {loading ? 
-                <p>Loading</p>
+                <div className="loader2 mx-auto mt-60"></div>
             :
             error ? 
                 <p>{error}</p>

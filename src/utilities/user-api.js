@@ -18,7 +18,6 @@ export function adminVerify() {
 }
 
 export function logOut() {
-  console.log('sending log out')
   return sendRequest(`${BASE_URL}/logout`, 'POST');
 }
 

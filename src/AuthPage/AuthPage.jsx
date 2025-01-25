@@ -26,13 +26,6 @@ function AuthPage() {
                     <p className="">Return</p>
                 </div>
 
-                {/* <button onClick={toggleForm} className="bg-slate-50 rounded-md px-2 py-1 mt-4">
-                    {showLogin ? <p className="text-red-800">SignUp</p> : <p className="text-red-800">Login</p>}
-                </button>
-                <button onClick={navigateBack} className="bg-slate-50 rounded-md px-2 py-1 mt-4">
-                <p className="text-red-800">Return</p>
-                </button> */}
-
             </div>
             <div className="">
 

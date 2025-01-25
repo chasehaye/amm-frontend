@@ -45,7 +45,6 @@ export async function getUser() {
 }
 
 export async function logOut() {
-  console.log('making call here')
   await userAPI.logOut();
   removeToken();
 }

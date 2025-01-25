@@ -21,7 +21,7 @@ function AnimeItemDetailPage () {
     },[animeId])
     return (
         <>
-            {anime ? <AnimeDetailItem anime={anime} /> : <p>Loading...</p>} 
+            {anime ? <AnimeDetailItem anime={anime} /> : <div className="loader2 mx-auto mt-60"></div>} 
         </>
     )
 }
