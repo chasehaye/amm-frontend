@@ -71,7 +71,7 @@ function UserAnimePage() {
                 <AnimeListComp animeList={userAnimeList} />
                 </>
             :
-                <div class="loader2 mx-auto mt-10"></div>
+                <div class="loader2 mx-auto mt-60"></div>
             }
 
             
