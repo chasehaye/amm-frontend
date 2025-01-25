@@ -1,27 +1,11 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { index } from '../../utilities/anime-api';
 import AnimeItem from '../AnimeItem/AnimeItem';
 
-function AdminList() {
+function AdminList({animeList}) {
 
-    const [animeList, setAnimeList] = useState([]);
-
-    useEffect(() => {
-        async function fetchAnime() {
-            try {
-                const anime = await index();
-                const mappedAnime = anime.map(anime => (
-                    <AnimeItem key={anime.id} anime={anime} />
-                ))
-                setAnimeList(mappedAnime);
-            } catch (err) {
-                console.error("Failed to fetch Anime List", err);
-            }
-        }
-
-        fetchAnime();
-    }, []);
-
+    const mappedAnime = animeList.map(anime => (
+        <AnimeItem key={anime.id} anime={anime} />
+    ))
 
     return(
         <> 
@@ -56,7 +40,7 @@ function AdminList() {
                     </div>
                 </div>
 
-                {animeList}
+                {mappedAnime}
         </>
     )
 }
