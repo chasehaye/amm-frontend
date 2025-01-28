@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { createNewGenre } from "../../utilities/anime-api";
+import FormSubmissionButton from "../../Components/FormSubmissionButton/FormSubmissionButton";
 
 function NewGenreForm({ onGenreAdded}) {
 
@@ -37,13 +38,7 @@ function NewGenreForm({ onGenreAdded}) {
                 <input placeholder="Genre" type="text" id="name" ref={genreNameRef} className="px-2 py-1 text-c1 px-1"/>
             </div>
 
-            {!loading ?
-                <div className="w-full flex justify-center mt-10">
-                        <button className=" mx-auto py-1 px-6 border border-c4 text-sm hover:bg-c2 h-10">Create</button>
-                </div>
-                :
-                <div class="loader mt-10"></div>
-            }
+            <FormSubmissionButton buttonText="Add Genre" isSubmitting={loading} />
 
         </form>
         <div className="flex justify-center items-center mb-2">{error}</div>

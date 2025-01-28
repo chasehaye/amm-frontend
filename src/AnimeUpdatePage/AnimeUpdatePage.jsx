@@ -8,6 +8,7 @@ function AnimeItemPage() {
     const [ anime, setAnime ] = useState({});
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState('');
+    const [showModal, setShowModal] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,6 +42,22 @@ function AnimeItemPage() {
             console.log(error);
         }
     }
+
+    const confirmDelete = () => {
+        setShowModal(true);
+    };
+
+    const handleCancel = () => {
+        setShowModal(false);
+        setGenreToDelete(null);
+    };
+
+    const handleConfirmDelete = () => {
+        handleDelete();
+        setShowModal(false);
+    };
+
+
     const [hovered, setHovered] = useState(false);
 
     return (
@@ -51,7 +68,7 @@ function AnimeItemPage() {
             error ? 
                 <p>{error}</p>
             :
-            <div>
+            <div className="">
                 <h1 class="mt-4 flex justify-center mb-8 border-b border-c4 w-40 mx-auto pb-2 hover:cursor-pointer"
                     onMouseEnter={() => setHovered(true)} 
                     onMouseLeave={() => setHovered(false)}
@@ -59,10 +76,36 @@ function AnimeItemPage() {
                 >
                     {hovered ? 'Return' : 'Update Anime'}
                 </h1>
-                <AnimeUpdate anime={anime} setAnime={setAnime}/>
-                <div className="w-full flex justify-end mt-10 mr-10" onClick={handleDelete}>
-                    <button className="mb-10 py-1 px-6 border border-c4 text-sm hover:bg-c2 mt-2 h-10 mr-40">Delete</button>
+                <div className="fixed top-0 right-0 p-4" onClick={() => confirmDelete()}>
+                    <button className="mb-10 py-1 px-6 border border-c4 text-sm hover:bg-c2 mt-4 h-10 mr-4">Delete</button>
                 </div>
+
+                
+                {showModal && (
+                    <div className="fixed z-[9999] inset-0 bg-black bg-opacity-80 flex items-center justify-center">
+                        <div className=" bg-c1 p-6 w-96">
+                            <h3 className="text-lg font-bold mb-4 flex justify-center items-center text-c2">Confirm Deletion</h3>
+                            <p className="flex justify-center items-center">Are you sure you want to delete this Genre and its link to other Animes?</p>
+                            <div className="mt-4 flex justify-end space-x-4 flex justify-center items-center">
+                                <button
+                                    className="py-1 px-4 bg-c4 text-white hover:bg-c6"
+                                    onClick={handleCancel}
+                                >
+                                    Cancel
+                                </button>
+                                <button
+                                    className="py-1 px-4 bg-c2 text-white hover:bg-c6"
+                                    onClick={handleConfirmDelete}
+                                >
+                                    Confirm
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                )}
+
+
+                <AnimeUpdate anime={anime} setAnime={setAnime}/>
             </div>
             }
         </>

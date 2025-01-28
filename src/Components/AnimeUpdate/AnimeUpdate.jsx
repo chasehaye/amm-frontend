@@ -4,11 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
+import FormSubmissionButton from "../FormSubmissionButton/FormSubmissionButton";
 
 function AnimeItemDetail({anime, setAnime}){
     const navigate = useNavigate();
 
     const [error, setError] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const titleEnglishRef = useRef(anime.titleEnglish);
     const titleJpRomanRef = useRef(anime.titleJpRoman);
@@ -211,6 +213,7 @@ function AnimeItemDetail({anime, setAnime}){
 
 
     async function handleSubmit(e){
+        setLoading(true);
         e.preventDefault();
         setError('');
 
@@ -241,6 +244,8 @@ function AnimeItemDetail({anime, setAnime}){
             navigate("/admin/home");
         }catch{
             setError("Invalid update");
+        }finally{
+            setLoading(false);
         }
     }
 
@@ -573,7 +578,7 @@ function AnimeItemDetail({anime, setAnime}){
 
 
                 <div className="w-full flex justify-center mt-10">
-                    <button className="m-20 mx-auto py-1 px-6 border border-c4 text-sm hover:bg-c2 mt-2 h-10">Update</button>
+                    <FormSubmissionButton  buttonText="Update" isSubmitting={loading} />
                 </div>
 
 

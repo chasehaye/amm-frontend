@@ -5,10 +5,13 @@ import DatePicker from "react-datepicker";
 import Select from "react-select";
 import "react-datepicker/dist/react-datepicker.css";
 import { UserContext } from "../../UserProvider";
+import FormSubmissionButton from "../FormSubmissionButton/FormSubmissionButton";
 
 const NewAnimeForm = () => {
     const navigate = useNavigate();
     const { user } = useContext(UserContext);
+
+    const [loading, setLoading] = useState(false);
     
 
     const [ error, setError ] = useState('');
@@ -130,7 +133,7 @@ const NewAnimeForm = () => {
                 setSearchResults(searchedAnimes);
             }catch{
                 setSearchResults([]);
-                console.log('searching failed');
+                console.log('search failed');
             }
         };
         searchAndFetchAnimes();
@@ -184,6 +187,7 @@ const NewAnimeForm = () => {
 
     // form submission
     async function handleSubmit(e) {
+        setLoading(true);
         e.preventDefault();
         setError('');
 
@@ -194,7 +198,7 @@ const NewAnimeForm = () => {
 
         
 
-        const newAnime = {created_by: user.id,};
+        const newAnime = {created_by_id: user.id,};
 
         if (titleEnglishRef.current.value) newAnime.titleEnglish = titleEnglishRef.current.value.trim();
         if (titleJpRomanRef.current.value) newAnime.titleJpRoman = titleJpRomanRef.current.value.trim();
@@ -218,6 +222,8 @@ const NewAnimeForm = () => {
             navigate("/admin/home");
         }catch{
             setError('Invalid Submission')
+        }finally{
+            setLoading(false);
         }
     }
 
@@ -558,7 +564,9 @@ const NewAnimeForm = () => {
 
 
             <div className="w-full flex justify-center mt-10">
-                <button className="m-20 mx-auto py-1 px-6 border border-c4 text-sm hover:bg-c2 mt-2 h-10">Add</button>
+                <div className="mx-auto pb-20">
+                    <FormSubmissionButton buttonText="Add Anime" isSubmitting={loading} />
+                </div>
             </div>
         </form>
         <p className="flex w-full justify-center items-center mb-2">{error}</p>

@@ -2,6 +2,7 @@ import React, { useState, useEffect} from "react";
 import NewStudioForm from "./NewStudioForm/NewStudioForm";
 import { Link } from "react-router-dom";
 import { indexStudio, deleteStudio } from "../utilities/anime-api";
+import Loader from "../Components/Loader/Loader";
 
 function AddStudioPage() {
     const [error, setError] = useState(null);
@@ -84,10 +85,7 @@ function AddStudioPage() {
                         ))}
                     </div>
                 ) : (
-                    <>
-                    <div class="loader2"></div>
-                    <div>loading</div>
-                    </>
+                    <div className="-mt-20"><Loader/></div>
                 )}
             </div>
 

@@ -3,6 +3,7 @@ import { UserContext } from "../UserProvider";
 import NavBar from "../Components/NavBar/NavBar";
 import { retrieveUserList } from "../utilities/user-api";
 import AnimeListComp from "../Components/AnimeListComp/AnimeListComp";
+import Loader from "../Components/Loader/Loader";
 
 
 function UserAnimePage() {
@@ -28,7 +29,7 @@ function UserAnimePage() {
             }catch(error){
                 console.error('Error fetching user anime list:', error);
             }finally{
-                setLoading(true)
+                setLoading(true);
             }
         };
     
@@ -70,7 +71,7 @@ function UserAnimePage() {
                 <AnimeListComp animeList={userAnimeList} />
                 </>
             :
-                <div class="loader2 mx-auto mt-20"></div>
+                <Loader />
             }
 
             

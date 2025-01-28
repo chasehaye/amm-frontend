@@ -31,7 +31,8 @@ function AdminList({animeList}) {
                     </div>
                 </div>
 
-                <div className="flex p-3 w-[70vw] mx-auto border-b border-l border-r border-c4 border-c4 mb-10 select-none">
+                <div className="flex px-5 pb-2 w-[70vw] mx-auto border-b border-l border-r border-c4 border-c4 mb-10 select-none">
+
                     <div className="w-[30vw] flex justify-between">
                         <span className='ml-8'>Anime</span>
                     </div>

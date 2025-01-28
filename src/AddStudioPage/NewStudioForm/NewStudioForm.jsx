@@ -2,6 +2,7 @@ import React, { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createNewStudio } from "../../utilities/anime-api";
 import DatePicker from "react-datepicker";
+import FormSubmissionButton from "../../Components/FormSubmissionButton/FormSubmissionButton";
 
 function NewStudioForm({onStudioAdded}) {
 
@@ -65,13 +66,7 @@ function NewStudioForm({onStudioAdded}) {
 
             <div className="h-40">
                 <div className="flex justify-center items-center my-2">{error}</div>
-                {!loading ? 
-                    <div className="w-full flex justify-center mt-4">
-                            <button className="mx-auto py-1 px-6 border border-c4 text-sm hover:bg-c2 h-10">Create</button>
-                    </div>
-                    :
-                    <div class="loader mt-4"></div>
-                }
+                <FormSubmissionButton buttonText="Add Studio" isSubmitting={loading} />
             </div>
 
         </form>

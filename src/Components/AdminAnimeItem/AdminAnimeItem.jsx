@@ -5,9 +5,9 @@ function AdminAnimeItem({anime}) {
 
     return(
         <>
-        <div className="justify-center items-center mx-auto">
+
             <div className="flex px-5 w-[70vw] mx-auto border border-c4">
-                <div className="">
+                <div className="w-[30vw] flex justify-between">
                 <Link to={`/anime/${anime.id}`}>
                     <div className="flex flex-row">
                         {
@@ -21,7 +21,7 @@ function AdminAnimeItem({anime}) {
                             <div className="w-[87px] h-[123px] mt-2 mb-2 bg-c4 text-c6 flex items-center justify-center"><span className="text-5xl">?</span></div>
                         )
                         }
-                        <div className="flex text-left w-80 break-words overflow-hidden whitespace-normal pl-[1vw] pt-4">
+                        <div className="flex text-left break-words overflow-hidden whitespace-normal pl-[1vw] pt-4">
                             {anime.titleEnglish ? anime.titleEnglish : anime.titleJpRoman}
                         </div>
                     </div>
@@ -49,7 +49,7 @@ function AdminAnimeItem({anime}) {
 
 
             </div>
-        </div>
+
         </>
     )
 }

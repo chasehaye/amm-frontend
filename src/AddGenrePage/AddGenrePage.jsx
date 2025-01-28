@@ -3,6 +3,7 @@ import NewGenreForm from "./NewGenreForm/NewGenreForm";
 import { indexGenre,deleteGenre } from "../utilities/anime-api";
 import { Link } from "react-router-dom";
 import '../index.css';
+import Loader from "../Components/Loader/Loader";
 
 function AddGenrePage() {
     const [error, setError] = useState(null);
@@ -87,10 +88,7 @@ function AddGenrePage() {
                         ))}
                     </div>
                 ) : (
-                    <>
-                    <div class="loader2"></div>
-                    <div>loading</div>
-                    </>
+                        <Loader />
                 )}
             </div>
 
