@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Register(){
   const { user, setUser } = useContext(UserContext);
+  const [isSubmiting, setIsSubmiting] = useState(false);
   const [credentials, setCredentials] = useState({
     name: '',
     email: '',
@@ -31,11 +32,12 @@ function Register(){
       setError('Passwords do not match');
       return;
     }
+    setIsSubmiting(true);
     try{
       // register and retrieve user to set globally
+      setIsSubmiting(true);
       const user = await userService.register(credentials);
       setUser(user);
-      console.log(user)
     }catch{
       setError('Registration Failed');
     }
@@ -43,6 +45,7 @@ function Register(){
 
   useEffect(() => {
     if (user) {
+      setIsSubmiting(false);
       navigate('/');
     }
   }, [user, navigate]);
@@ -64,9 +67,13 @@ function Register(){
             <label className='text-center'>Confirm</label>
             <input className='mt-1 text-c1 px-1' type="password" placeholder="Password" name="confirmPassword" value={confirmPassword} onChange={handleChange} required />
 
-            <div className="mx-auto pt-4">
-              <button className="hover:bg-c2 hover:text-c6 px-4 h-8 mb-4 border-t border-b border-c4">Sign Up</button>
-            </div>
+            {!isSubmiting ?
+                <div className="w-full flex justify-center mt-10 mx-auto">
+                        <button className="mx-auto py-1 px-6 border border-c4 text-sm hover:bg-c2 h-10">Create</button>
+                </div>
+                :
+                <div class="mx-auto py-1 px-6 border border-c4 text-sm h-10 loader mt-10"></div>
+            }
           </div>
         </form>
       </div>
