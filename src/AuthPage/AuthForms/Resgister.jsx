@@ -35,16 +35,11 @@ function Register(){
       // register and retrieve user to set globally
       const user = await userService.register(credentials);
       setUser(user);
+      navigate('/');
     }catch{
       setError('Registration Failed');
     }
   }
-
-  useEffect(() => {
-    if (user) {
-      navigate('/');
-    }
-  }, [user, navigate]);
 
   return(
     <>
