@@ -41,6 +41,12 @@ function Register(){
     }
   }
 
+  useEffect(() => {
+    if (user) {
+      navigate('/');
+    }
+  }, [user, navigate]);
+
   return(
     <>
       <div className='mt-4 pt-2 w-80 mx-auto border-x border-c4 h-80 pt-4'>
