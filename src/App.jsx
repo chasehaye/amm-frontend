@@ -64,6 +64,7 @@ function App() {
           {/* Null routes */}
           <Routes>
             <Route path='/auth' element={<AuthPage />}></Route>
+            <Route path='/auth/reg' element={<AuthPage initialShowLogin={false} />} />
             <Route path='/' element={<LandingPage />}></Route>
             <Route path='/anime/:animeId' element={<AnimeItemDetailPage />}></Route>
             <Route path='/trending' element={<TrendingPage />}></Route>

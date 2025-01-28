@@ -2,7 +2,7 @@ import React from "react";
 
 function UnderDevComp({titleOfDev}){
     return(
-        <div className="flex flex-col items-center justify-center p-4">
+        <div className="flex flex-col items-center justify-center p-4 select-none">
             <div className="text-lg text-center mb-6 border-b border-r p-4 border-c4">
                 Currently under development
             </div>

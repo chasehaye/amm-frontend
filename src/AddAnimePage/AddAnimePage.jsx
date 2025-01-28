@@ -7,7 +7,7 @@ function AddAnimePage() {
 
     return(
         <>
-            <h1 class="mt-4 flex justify-center mb-8 border-b border-c4 w-40 mx-auto pb-2 hover:cursor-pointer"
+            <h1 class="mt-4 flex justify-center mb-8 border-x border-c4 w-40 mx-auto pb-2 pt-2 hover:cursor-pointer hover:bg-c2 select-none"
                 onMouseEnter={() => setHovered(true)} 
                 onMouseLeave={() => setHovered(false)}
                 onClick={() => navigate(-1)}

@@ -37,10 +37,9 @@ function UserAnimePage() {
 
     return(
         <>
-
+            <NavBar/>
             {loading ? 
             <>
-                    <NavBar/>
                     <div className="flex w-full justify-center items-center text-center mx-auto border-b border-c4 pb-4">
                         Your Anime
                     </div>
@@ -71,7 +70,7 @@ function UserAnimePage() {
                 <AnimeListComp animeList={userAnimeList} />
                 </>
             :
-                <div class="loader2 mx-auto mt-60"></div>
+                <div class="loader2 mx-auto mt-20"></div>
             }
 
             

@@ -1,6 +1,7 @@
 import React, { useContext } from 'react';
 import { UserContext } from '../UserProvider';
 import NavBar from '../Components/NavBar/NavBar';
+import { Link } from 'react-router-dom';
 
 function Home() {
 
@@ -34,9 +35,9 @@ function Home() {
                     </div>
                 </div>
                 <div className='mr-32 border border-c4 p-6 w-1/2'>
-                    <div className='border border-c4 mb-2 py-4 flex justify-center items-center text-center text-2xl cursor-pointer py-1'>
+                    <Link className='border border-c4 mb-2 py-4 flex justify-center items-center text-center text-2xl cursor-pointer py-1' to='/profile'>
                         {user.name}
-                    </div>
+                    </Link>
                     <div className='text-lg flex justify-center items-center text-center pt-2 leading-[2.0] border-t border-c4 mt-8 flex flex-col'>
                         <div>
                             Welcome, home

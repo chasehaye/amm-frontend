@@ -15,7 +15,6 @@ function TopAnimePage(){
                 }
                 const anime = await indexOrder(queryParameters);
                 setAnime(anime)
-                console.log(anime)
             }
             fetchAnime();
         }, [])

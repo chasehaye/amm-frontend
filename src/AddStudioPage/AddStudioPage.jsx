@@ -58,7 +58,7 @@ function AddStudioPage() {
 
     return(
         <>
-            <Link className="mt-4 flex justify-center items-center mb-2 border-x border-c4 w-40 mx-auto py-2 cursor-pointer hover:bg-c2" to="/admin/home"
+            <Link className="mt-4 flex justify-center items-center mb-2 border-x border-c4 w-40 mx-auto py-2 cursor-pointer hover:bg-c2 select-none" to="/admin/home"
                 onMouseEnter={() => setHovered(true)} 
                 onMouseLeave={() => setHovered(false)}
             >
@@ -84,7 +84,10 @@ function AddStudioPage() {
                         ))}
                     </div>
                 ) : (
+                    <>
                     <div class="loader2"></div>
+                    <div>loading</div>
+                    </>
                 )}
             </div>
 

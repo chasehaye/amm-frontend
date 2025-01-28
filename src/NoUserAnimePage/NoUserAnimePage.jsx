@@ -18,6 +18,9 @@ function NoUserAnimePage() {
     return(
         <>
         <NavBar/>
+        <div className="flex w-full justify-center items-center text-center mx-auto border-b border-c4 pb-2 mb-4">
+            (temporarily sorted by created)
+        </div>
         <AnimeListComp animeList={anime} />
         </>
     )

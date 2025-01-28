@@ -55,7 +55,7 @@ function NavBar() {
     useEffect(() => {
         const timeoutId = setTimeout(() => {
           setDebouncedSearchTerm(searchTerm);
-        }, 500);
+        }, 200);
         return () => {
           clearTimeout(timeoutId);
         };
@@ -63,7 +63,10 @@ function NavBar() {
 
     useEffect (()=> {
         const searchAndFetchAnimes = async () => {
-            if(!debouncedSearchTerm) return;
+            if(!debouncedSearchTerm){
+                setSearchResults([]);
+                return;
+            };
             try{
                 const searchParams = {
                     titleEnglish: debouncedSearchTerm,
@@ -131,7 +134,7 @@ function NavBar() {
                     <span className="absolute bottom-0 transform translate-y-1/2 right-0 h-20 border-r-2 border-c4"></span>
                     <span className="absolute right-0 bottom-0 w-full h-1/2 border-b-2 border-c4"></span>
                 </div>
-                <div className="p-2 flex-1 text-center cursor-pointer hover:text-c2 relative" onMouseEnter={handleSearchHover} onMouseLeave={handleSearchLeave}>
+                <div className="p-2 flex-1 text-center cursor-pointer hover:text-c2 relative" onClick={() => setIsSearchHovered(prevState => !prevState)}>
                     <p className="select-none ">Search</p>
                     <span className="absolute bottom-1/2 transform translate-y-1/2 right-0 h-20 border-r-2 border-c4"></span>
                     <span className="absolute right-0 bottom-0 w-full h-1/2 border-b-2 border-c4"></span>
@@ -186,12 +189,12 @@ function NavBar() {
                     </div>
                 </div>
                 <div className="p-2 flex-1 relative">
-                    <div className={`p-2 absolute top-0 left-0 w-full text-center cursor-pointer ${isSearchHovered ? '' : 'hidden'}`} onMouseEnter={handleSearchHover} onMouseLeave={handleSearchLeave} onClick={toggleSearchClick}>
+                    <div className={`pr-2 pt-2 absolute top-0 left-0 w-full text-center cursor-pointer ${isSearchHovered ? '' : 'hidden'}`}>
                         {/* Search Input */}
                         <input
                             name='search'
                             type="text"
-                            className="mx-auto p-2 mx-auto mb-2 w-48 bg-c5 text-c6 h-8"
+                            className="mx-auto p-2 mx-auto mb-2 w-48 bg-c5 text-c6 h-8 w-[90%]"
                             placeholder="Search..."
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
@@ -201,7 +204,7 @@ function NavBar() {
                                 No results
                             </div>
                         )}
-                        <div className="w-[17.5vw] max-w-lg mx-auto text-c6">
+                        <div className="w-[17.5vw] max-w-lg mx-auto text-c6 pl-1 pr-2">
 
                             {/* Error Message */}
                             {error && (
@@ -211,19 +214,28 @@ function NavBar() {
                             )}
 
                             {/* Search Results */}
-                            <div className="bg-c5 relative z-5">
+                            <div className="bg-c5 relative z-100 max-h-[40vh] overflow-y-auto scrollbar-custom overflow-x-hidden border-r-2  border-c2">
                                 {searchResults.map((anime, index) => (
                                     <Link to={`/anime/${anime.id}`}>
                                         <div
                                             key={index}
                                             className="p-2 border-b border-c4 pb-1 hover:bg-c2 hover:text-c5 cursor-pointer relative z-5 flex"
                                         >
-                                            <img 
-                                                src={anime.image} 
-                                                alt={"Anime Image"} 
-                                                className="w-[29px] h-[41px] object-cover mr-2" 
-                                            />
-                                            {anime.titleEnglish || anime.titleJpRoman || "Unknown Title"}
+                                            {anime.image ? (
+                                                <img 
+                                                    src={anime.image} 
+                                                    alt={"Anime Image"} 
+                                                    className="w-[48px] h-[66px] object-cover mr-2" 
+                                                />
+                                            ) : (
+                                                <div 
+                                                    className="w-[48px] h-[66px] bg-c4 text-c6 flex items-center justify-center mr-2" 
+                                                    aria-label="No Image Available"
+                                                ><span className="text-2xl">?</span></div>
+                                            )}
+                                            <div className="w-[80%]">
+                                                {anime.titleEnglish || anime.titleJpRoman || "Unknown Title"}
+                                            </div>
                                         </div>
                                     </Link>
                                 ))}

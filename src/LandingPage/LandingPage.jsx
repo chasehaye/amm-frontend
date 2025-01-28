@@ -32,7 +32,7 @@ function LandingPage() {
                 </div>
                 <div className='mr-32 border border-c4 p-6 w-1/2'>
                     <Link
-                        to="/auth"
+                        to="/auth/reg"
                         className="border border-c4 mb-2 py-4 flex justify-center items-center text-center text-2xl cursor-pointer"
                     >
                         Register
