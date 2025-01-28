@@ -40,15 +40,11 @@ function Register(){
       setUser(user);
     }catch{
       setError('Registration Failed');
-    }
-  }
-
-  useEffect(() => {
-    if (user) {
+    }finally{
       setIsSubmiting(false);
       navigate('/');
     }
-  }, [user, navigate]);
+  }
 
   return(
     <>
