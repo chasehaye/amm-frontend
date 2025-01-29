@@ -1,20 +1,31 @@
 import React, { useState, useEffect } from "react";
 import NavBar from "../Components/NavBar/NavBar";
-import AnimeListComp from "../Components/AnimeListComp/AnimeListComp";
+import RankedAnimeListComp from "./RankedAnimeListComp/RankedAnimeListComp";
 import { index, indexOrder } from "../utilities/anime-api";
+import Loader from "../Components/Loader/Loader";
 
 function TopAnimePage(){
+    // make it load properly
+    // add a generic global list to show anime (different style???)
+    // 
 
         const [anime, setAnime] = useState(null);
+        const [loading, setIsLoading] = useState(true);
         
         useEffect(() =>{
             async function fetchAnime() {
-                const queryParameters = {
-                    order_by: 'aggregateRating',
-                    order: 'des'
+                try{
+                    const queryParameters = {
+                        order_by: 'aggregateRating',
+                        order: 'des'
+                    }
+                    const anime = await indexOrder(queryParameters);
+                    setAnime(anime)
+                }catch(error){
+                    console.error('Error fetching anime:', error);
+                }finally{
+                    setIsLoading(false);
                 }
-                const anime = await indexOrder(queryParameters);
-                setAnime(anime)
             }
             fetchAnime();
         }, [])
@@ -22,10 +33,13 @@ function TopAnimePage(){
     return(
         <>
             <NavBar />
-            <div className="flex justify-center items-center border-b border-c4 mb-4 pb-2 ">
-                Top Anime
-            </div>
-            <AnimeListComp animeList={anime} />
+            {loading ?
+                <Loader />
+            :
+                <>
+                    <RankedAnimeListComp animeList={anime} />
+                </>
+            }
         </>
     )
 }

@@ -9,7 +9,6 @@ function AdminList({animeList}) {
 
     const handleClick = () => {
         setIsClicked(prevState => !prevState);
-        console.log(user.name);
     };
 
     const mappedAnime = isClicked

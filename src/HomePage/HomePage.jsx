@@ -40,7 +40,7 @@ function Home() {
                     </Link>
                     <div className='text-lg flex justify-center items-center text-center pt-2 leading-[2.0] border-t border-c4 mt-8 flex flex-col'>
                         <div>
-                            Welcome, home
+                            Welcome,
                         </div>
                         <div>
                             {user.name}

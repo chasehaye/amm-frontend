@@ -47,7 +47,7 @@ function UserAnimeItem({anime , color}) {
                 </div>
 
                 <div className="w-[10vw] justify-center text-center break-words overflow-hidden py-3">
-                    {anime.aggregateRating ? anime.aggregateRating.toFixed(2) : "N/A"}
+                    {anime.aggregateRating ? anime.aggregateRating.toFixed(2) : "-"}
                 </div>
 
 
