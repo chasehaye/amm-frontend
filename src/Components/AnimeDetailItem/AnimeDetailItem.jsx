@@ -4,7 +4,6 @@ import { linkAnimeToUser, retrieveUserAnimeInfo, updateUserAnimeRating, updateUs
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserProvider";
-import Loader from "../../Components/Loader/Loader"
 
 function AnimeDetailItem ({anime}) {
 
@@ -139,7 +138,8 @@ function AnimeDetailItem ({anime}) {
             console.log(err)
         }
     }
-
+    const [isEditing, setIsEditing] = useState(false);
+    
     const UpdateUserAnimeEpisodeCount = async (selection) => {
         setUserEpisodeCount(selection);
         try{
@@ -152,29 +152,27 @@ function AnimeDetailItem ({anime}) {
             console.log(err)
         }
     }
-
-
-
-
-    // PICK UP HERE
-    const [isEditing, setIsEditing] = useState(false);
-    const [editedCount, setEditedCount] = useState(userEpidsodeCount);
-    const contentEditableRef = useRef(null);
-
+    
     useEffect(() => {
         if (isEditing && contentEditableRef.current) {
             contentEditableRef.current.focus();
+            placeCursorAtEnd(contentEditableRef.current);
         }
     }, [isEditing]);
 
     const handleKeyPress = (event) => {
         if (event.key === 'Enter') {
-            handleBlur();
-            UpdateUserAnimeEpisodeCount(editedCount)
-            setEditedCount(null)
+            handleBlur(); // Submit when Enter is pressed
         }
     };
-
+    
+    const [editedCount, setEditedCount] = useState(userEpidsodeCount);
+    const contentEditableRef = useRef(null);
+    useEffect(() => {
+        if (isEditing && contentEditableRef.current) {
+            contentEditableRef.current.focus();
+        }
+    }, [isEditing]);
     const handleInputChange = (event) => {
         const cursorPosition = getCursorPosition(contentEditableRef.current);
         const newValue = event.target.innerText;
@@ -183,15 +181,22 @@ function AnimeDetailItem ({anime}) {
             restoreCursorPosition(contentEditableRef.current, cursorPosition);
         }, 0);
     };
-
     const handleBlur = () => {
-        // On blur (losing focus), save the updated count
-        if (editedCount === "-" || isNaN(editedCount) || editedCount <= 0) {
-            setEditedCount(userEpidsodeCount); // Reset if the input is invalid
+        let updatedCount = editedCount;
+        if (updatedCount === "-" || isNaN(updatedCount) || updatedCount <= 0) {
+            updatedCount = userEpidsodeCount;
         }
-        setIsEditing(false); // Close the input field
+        if (updatedCount > anime.episodes) {
+            updatedCount = anime.episodes;
+        }
+
+        setEditedCount(updatedCount);
+        setIsEditing(false);
+        UpdateUserAnimeEpisodeCount(updatedCount);
     };
 
+
+    // functions for handling cursor location
     const getCursorPosition = (element) => {
         const selection = window.getSelection();
         const range = selection.getRangeAt(0);
@@ -200,8 +205,6 @@ function AnimeDetailItem ({anime}) {
         clonedRange.setEnd(range.startContainer, range.startOffset);
         return clonedRange.toString().length;
     };
-
-    // Restore the cursor position within the contentEditable div
     const restoreCursorPosition = (element, position) => {
         const selection = window.getSelection();
         const range = document.createRange();
@@ -210,7 +213,17 @@ function AnimeDetailItem ({anime}) {
         selection.removeAllRanges();
         selection.addRange(range);
     };
-
+    const placeCursorAtEnd = (element) => {
+        const selection = window.getSelection();
+        const range = document.createRange();
+    
+        if (element.lastChild) {
+            range.setStart(element.lastChild, element.lastChild.length);
+            range.setEnd(element.lastChild, element.lastChild.length);
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    };
     
 
 
@@ -481,11 +494,11 @@ function AnimeDetailItem ({anime}) {
                                         suppressContentEditableWarning
                                         onInput={handleInputChange}
                                         onKeyPress={handleKeyPress}
-                                        onBlur={handleBlur}
+                                        // onBlur={handleBlur}
                                         className="w-12 text-center mr-2 mb-1 outline-none"
                                         
                                     >
-                                        {editedCount === "-" ? 0 : editedCount}
+                                        {userEpidsodeCount === "-" ? 0 : userEpidsodeCount}
                                     </div>
                                 ) :(
                                     <span className="hover:text-c2" >{userEpidsodeCount}</span>
@@ -496,7 +509,7 @@ function AnimeDetailItem ({anime}) {
                             </div>
                         </div>
                         <div className=" ml-3 text-c4 px-1 h-4 my-auto border-x border-c4  flex items-center justify-center cursor-pointer hover:text-c2 hover:border-c2"   onClick={() => {
-                            const updatedEpisodeCount = userEpidsodeCount === "-" ? 1 : userEpidsodeCount + 1;
+                            const updatedEpisodeCount = userEpidsodeCount === "-" ? 1 : parseInt(userEpidsodeCount) + 1;
                             UpdateUserAnimeEpisodeCount(updatedEpisodeCount);
                         }}>
                             +
