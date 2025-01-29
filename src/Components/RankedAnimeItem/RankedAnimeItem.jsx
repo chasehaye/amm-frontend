@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 function RankedAnimeItem({anime, rank}) {
     return(
@@ -7,7 +8,7 @@ function RankedAnimeItem({anime, rank}) {
                 <div className="px-2 text-5xl my-auto mx-1 text-center w-28">
                     {rank}
                 </div>
-                <div className="mr-4 h-full border-r border-l px-2 border-c4">
+                <Link to={`/anime/${anime.id}`} className="mr-4 h-full border-r border-l px-2 border-c4">
                     {
                             anime.image ? (
                                 <img 
@@ -19,11 +20,11 @@ function RankedAnimeItem({anime, rank}) {
                                 <div className="w-[116px] h-[164px] mt-2 mb-2 bg-c4 text-c6 flex items-center justify-center"><span className="text-5xl">?</span></div>
                             )
                     }
-                </div>
+                </Link>
                 <div>
-                    <div className="mt-2 text-lg">
+                    <Link to={`/anime/${anime.id}`} className="mt-2 text-lg hover:text-c2">
                         {anime.titleJpRoman}
-                    </div>
+                    </Link>
                     <div className="ml-1 mt-1">
                         {(anime.type && anime.episodes) ? `${anime.type} |  ${anime.episodes}` : "-"}
                     </div>
