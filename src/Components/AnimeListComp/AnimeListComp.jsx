@@ -1,10 +1,10 @@
 import React from "react";
-import AnimeItem from "../AnimeItem/AnimeItem";
+import AnimeItem from "../UserAnimeItem/UserAnimeItem";
 
 function AnimeListComp({animeList}){
     return(
         <>
-            <div className="flex p-3 w-[70vw] mx-auto border border-c4">
+            <div className="flex px-5 py-2 mb-2 mt-6 w-[70vw] mx-auto border border-c4 select-none">
                 <div className="w-[30vw]">
                     <span className='ml-8'>Anime</span>
                 </div>
