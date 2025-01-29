@@ -169,3 +169,16 @@ textarea::placeholder {
 @keyframes l1 {
     100% {background-size:100%}
 }
+
+/* HTML: <div class="loader3"></div> */
+/* HTML: <div class="loader"></div> */
+.loader3 {
+  width: 30px;
+  height: 30px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: var(--c2) #0000;
+  animation: l1 1s infinite;
+}
+@keyframes l1 {to{transform: rotate(.5turn)}}

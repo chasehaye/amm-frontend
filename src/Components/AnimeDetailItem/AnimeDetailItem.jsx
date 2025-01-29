@@ -4,6 +4,7 @@ import { linkAnimeToUser, retrieveUserAnimeInfo, updateUserAnimeRating, updateUs
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../UserProvider";
+import Loader from "../../Components/Loader/Loader"
 
 function AnimeDetailItem ({anime}) {
 
@@ -58,20 +59,29 @@ function AnimeDetailItem ({anime}) {
         setIsSelectVisible(!isSelectVisible);
     };
     const [isValidLinkEstablished, setIsValidLinkEstablished] = useState(null);
+    const [isLinkingTo, setIsLinkingTo] = useState(false);
 
     const handleSelectionLinkage = async (selection) => {
-        const queryParameters = {
-            user_id: user.id,
-            anime_id: anime.id,
-            list_type: selection,
-        };
-        const linkResponse = await linkAnimeToUser(user.name, queryParameters);
-        if(linkResponse.message === "success"){
-            setIsValidLinkEstablished(selection)
+        try {
+            setIsLinkingTo(selection);
+            const queryParameters = {
+                user_id: user.id,
+                anime_id: anime.id,
+                list_type: selection,
+            };
+            const linkResponse = await linkAnimeToUser(user.name, queryParameters);
+            if (linkResponse.message === "success") {
+                setIsValidLinkEstablished(selection);
+            }
+        } catch (error) {
+            console.error("Error linking anime to user:", error);
+            // You can display an error message here if needed
+        } finally {
+            setIsLinkingTo(false);
+            setIsSelectVisible(false);
+            setIsListSubMenu(false);
         }
-        setIsSelectVisible(false);
-        setIsListSubMenu(false);
-    }
+    };
 
     useEffect(() => {
         if (isValidLinkEstablished !== null) {
@@ -117,14 +127,15 @@ function AnimeDetailItem ({anime}) {
     }, [isValidLinkEstablished]);
 
     const handleRatingUpdate = async (selection) => {
+        setUserRating(selection)
         try{
             const queryParameters = {
                 userId: user.id,
                 score: selection,
             };
             const response = await updateUserAnimeRating(user.name, anime.id, queryParameters);
-            setUserRating(response.rating);
             setIsRatingMenuHovered(false);
+            setUserRating(response.rating)
         }catch(err){
             console.log(err)
         }
@@ -260,18 +271,41 @@ function AnimeDetailItem ({anime}) {
                     {isSelectVisible && (
                         <div className="mt-2 pt-2 px-1 ml-14">
                             <ul>
-                                <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(1)}>Add to currently watching</li>
-                                <div className="border-b border-c4 w-[50%] ml-2"></div>
-                                <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(2)}>Add to completed</li>
-                                <div className="border-b border-c4 w-[50%] ml-2"></div>
-                                <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(3)}>Add to plan to watch</li>
-                                <div className="border-b border-c4 w-[50%] ml-2"></div>
-                                <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(4)}>Add to dropped</li>
-                                <div className="border-b border-c4 w-[50%] ml-2"></div>
-                                <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(5)}>Add to interested in</li>
-                                <div className="border-b border-c4 w-[50%] ml-2"></div>
-                                <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(6)}>Add to on hold</li>
-                                <div className="border-b border-c4 w-[50%] ml-2"></div>
+                                <div className="flex">
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(1)}>Add to watching</li>
+                                    {(isLinkingTo === 1) ? <div class="loader3 my-auto ml-2"></div> :""}
+                                </div>
+                                <div className="border-b border-c4 w-[50%]"></div>
+
+                                <div className="flex">
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(2)}>Add to completed</li>
+                                    {(isLinkingTo === 2) ? <div class="loader3 my-auto ml-2"></div> :""}
+                                </div>
+                                <div className="border-b border-c4 w-[50%]"></div>
+
+                                <div className="flex">
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(3)}>Add to plan to watch</li>
+                                    {(isLinkingTo === 3) ? <div class="loader3 my-auto ml-2"></div> :""}
+                                </div>
+                                <div className="border-b border-c4 w-[50%]"></div>
+
+                                <div className="flex">
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(4)}>Add to dropped</li>
+                                    {(isLinkingTo === 4) ? <div class="loader3 my-auto ml-2"></div> :""}
+                                </div>
+                                <div className="border-b border-c4 w-[50%]"></div>
+
+                                <div className="flex">
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(5)}>Add to interested in</li>
+                                    {(isLinkingTo === 5) ? <div class="loader3 my-auto ml-2"></div> :""}
+                                </div>
+                                <div className="border-b border-c4 w-[50%]"></div>
+
+                                <div className="flex">
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(6)}>Add to on hold</li>
+                                    {(isLinkingTo === 6) ? <div class="loader3 my-auto ml-2"></div> :""}
+                                </div>
+                                <div className="border-b border-c4 w-[50%]"></div>
                             </ul>
                         </div>
                     )}

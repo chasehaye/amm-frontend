@@ -6,7 +6,7 @@ function GenericAnimeListItem({anime}) {
     <>
     <div className="border border-c4 mx-2 my-2 flex flex-col justify-between shadow-md" style={{ boxShadow: '0px 4px 6px rgba(0, 0, 0, 0), 0px 1px 3px rgba(138, 137, 137, 0.74)' }}>
         <div className="flex w-full">
-            <Link to={`/anime/${anime.id}`} className="h-full px-2 py-4 border-c4 flex-shrink-0">
+            <Link to={`/anime/${anime.id}`} className="h-full px-2 ml-2 py-4 border-c4 flex-shrink-0">
                 {
                         anime.image ? (
                             <img 

@@ -76,11 +76,11 @@ function AnimeListComp({ currently_watching = [], completed = [], plan_to_watch 
                     ))
             ) : (
                     <div className="flex p-3 w-[70vw] mx-auto border-b border-c4 justify-center items-center h-20">
-                    None added here
+                    -
                     </div>
             )) : (
                 <div className="flex p-3 w-[70vw] mx-auto border-b border-c4 justify-center items-center h-20">
-                    None added here
+                    -
                 </div>
             )}
         </>
