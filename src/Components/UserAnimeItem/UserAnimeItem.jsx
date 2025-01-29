@@ -25,7 +25,7 @@ function UserAnimeItem({anime , color}) {
                         )
                         }
                         <div className="flex text-left w-80 break-words overflow-hidden whitespace-normal">
-                            {anime.titleEnglish ? anime.titleEnglish : anime.titleJpRoman}
+                            {anime.titleJpRoman ? anime.titleJpRoman : anime.titleEnglish}
                         </div>
                     </div>
                 </Link>

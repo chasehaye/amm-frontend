@@ -1,16 +1,27 @@
 import React, { useEffect, useRef, useState } from "react";
 import NavBar from "../Components/NavBar/NavBar";
-import { index } from "../utilities/anime-api";
-import AnimeListComp from "../Components/AnimeListComp/AnimeListComp";
+import { indexOrder } from "../utilities/anime-api";
+import NoUserList from "./NoUserList/NoUserList";
+import Loader from "../Components/Loader/Loader";
 
 function NoUserAnimePage() {
     const [anime, setAnime] = useState(null);
+    const [loading, setIsLoading] = useState(true);
     
     useEffect(() =>{
         async function fetchAnime() {
-            const anime = await index();
-            setAnime(anime)
-            
+            try{
+                const queryParameters = {
+                    order_by: 'airDate',
+                    order: 'des'
+                }
+                const anime = await indexOrder(queryParameters);
+                setAnime(anime)
+            }catch(error){
+                console.error('Error fetching anime:', error);
+            }finally{
+                setIsLoading(false);
+            }
         }
         fetchAnime();
     }, [])
@@ -18,10 +29,13 @@ function NoUserAnimePage() {
     return(
         <>
         <NavBar/>
-        <div className="flex w-full justify-center items-center text-center mx-auto border-b border-c4 pb-2 mb-4">
-            (temporarily sorted by created)
-        </div>
-        <AnimeListComp animeList={anime} />
+        {loading ?
+            <Loader />
+        :
+            <>
+                <NoUserList animeList={anime} />
+            </>
+        }
         </>
     )
 }

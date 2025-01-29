@@ -22,7 +22,7 @@ function RankedAnimeItem({anime, rank}) {
                     }
                 </Link>
                 <div>
-                    <Link to={`/anime/${anime.id}`} className="mt-2 text-lg hover:text-c2">
+                    <Link to={`/anime/${anime.id}`} className="mt-4 text-lg hover:text-c2">
                         {anime.titleJpRoman}
                     </Link>
                     <div className="ml-1 mt-1">
