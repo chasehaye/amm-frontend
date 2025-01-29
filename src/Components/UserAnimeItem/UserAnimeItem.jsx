@@ -1,15 +1,13 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function UserAnimeItem({anime}) {
-
-    console.log(anime)
+function UserAnimeItem({anime , color}) {
 
     return(
         <>
         <div className="justify-center items-center mx-auto flex">
             <div className="flex pr-5 w-[70vw] mx-auto border border-c4">
-                <div className="bg-red-500 pl-2 my-1 ml-1">
+                <div className={`${color} pl-2 my-1 ml-1`}>
                     
                 </div>
                 <div className="w-[30vw] justify-center text-center py-3">
