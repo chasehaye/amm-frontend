@@ -135,20 +135,19 @@ function AnimeDetailItem ({anime}) {
             };
             const response = await updateUserAnimeRating(user.name, anime.id, queryParameters);
             setIsRatingMenuHovered(false);
-            setUserRating(response.rating)
         }catch(err){
             console.log(err)
         }
     }
 
     const UpdateUserAnimeEpisodeCount = async (selection) => {
+        setUserEpisodeCount(selection);
         try{
             const queryParameters = {
                 userId: user.id,
                 watchedEpisodeCount: selection
             };
             const response = await updateUserEpisodeCnt(user.name, anime.id, queryParameters);
-            setUserEpisodeCount(response.episodeCount);
         }catch(err){
             console.log(err)
         }
@@ -464,7 +463,7 @@ function AnimeDetailItem ({anime}) {
                             {isListSubMenu && (
                                 <>
                                 <div className="absolute mt-10 mx-2 left-0 w-full border-l border-c4  z-10 text-center cursor-pointer pt-3 hover:text-c2" onClick={() => handleSelectionLinkage(7)}>
-                                    remove list
+                                    remove from list
                                 </div>
                                 </>
                             )}
