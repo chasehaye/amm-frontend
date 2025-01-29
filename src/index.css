@@ -156,8 +156,7 @@ textarea::placeholder {
   100%{transform: rotate(1turn)}
 }
 
-/* HTML: <div class="loader2"></div> */
-/* HTML: <div class="loader"></div> */
+
 .loader {
   width: 120px;
   height: 2.5rem;
@@ -170,8 +169,7 @@ textarea::placeholder {
     100% {background-size:100%}
 }
 
-/* HTML: <div class="loader3"></div> */
-/* HTML: <div class="loader"></div> */
+
 .loader3 {
   width: 30px;
   height: 30px;
@@ -179,6 +177,6 @@ textarea::placeholder {
   border-radius: 50%;
   border: 8px solid;
   border-color: var(--c2) #0000;
-  animation: l1 1s infinite;
+  animation: l3 1s infinite;
 }
-@keyframes l1 {to{transform: rotate(.5turn)}}
+@keyframes l3 {to{transform: rotate(.5turn)}}

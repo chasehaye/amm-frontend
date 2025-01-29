@@ -290,7 +290,7 @@ function AnimeDetailItem ({anime}) {
                                 <div className="border-b border-c4 w-[50%]"></div>
 
                                 <div className="flex">
-                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => handleSelectionLinkage(2)}>Add to completed</li>
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => {handleSelectionLinkage(2); UpdateUserAnimeEpisodeCount(anime.episodes);}}>Add to completed</li>
                                     {(isLinkingTo === 2) ? <div class="loader3 my-auto ml-2"></div> :""}
                                 </div>
                                 <div className="border-b border-c4 w-[50%]"></div>
