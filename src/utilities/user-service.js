@@ -8,6 +8,35 @@ export async function register(userData) {
   return user;
 }
 
+export async function setRememberUser(data) {
+  const response = await userAPI.rememberUser(data);
+  if(response.message === 'Not remembered'){return}
+  if(response.message === 'Token created successfully'){
+    saveUserToken(response.token)
+  }
+  if(response.remove_token === true){
+    removeUserToken();
+  }
+}
+
+export async function grabRememberedUser() {
+  const token = retrieveUserToken();
+  if(token){
+    const response = await userAPI.rememberUser({token: token, remember_me: true});
+    if(response.message === 'Token validated successfully'){
+      return(response.email);
+    };
+    if(response.remove_token === true){
+      removeUserToken();
+    }
+  }else{return};
+}
+
+export async function removeRemeberedUser() {
+  removeUserToken();
+  return;
+}
+
 export async function getToken() {
   //grab token
 
@@ -67,6 +96,18 @@ export async function adminVerify(){
 
 function saveToken(token) {
   localStorage.setItem('jwt', token);
+}
+
+function saveUserToken(token) {
+  localStorage.setItem('remember_user', token);
+}
+
+function retrieveUserToken() {
+  return localStorage.getItem('remember_user');
+}
+
+function removeUserToken() {
+  localStorage.removeItem('remember_user');
 }
 
 function removeToken() {

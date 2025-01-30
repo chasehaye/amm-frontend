@@ -183,10 +183,10 @@ function AnimeDetailItem ({anime}) {
     };
     const handleBlur = () => {
         let updatedCount = editedCount;
-        if (updatedCount === "-" || isNaN(updatedCount) || updatedCount <= 0) {
+        if (updatedCount === "-" || isNaN(updatedCount) || updatedCount < 0) {
             updatedCount = userEpidsodeCount;
         }
-        if (updatedCount > anime.episodes) {
+        if (anime.episodes !== null && updatedCount > anime.episodes) {
             updatedCount = anime.episodes;
         }
 
@@ -290,7 +290,13 @@ function AnimeDetailItem ({anime}) {
                                 <div className="border-b border-c4 w-[50%]"></div>
 
                                 <div className="flex">
-                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => {handleSelectionLinkage(2); UpdateUserAnimeEpisodeCount(anime.episodes); setUserEpisodeCount(anime.episodes);}}>Add to completed</li>
+                                    <li className="py-1 hover:text-c2 cursor-pointer" onClick={() => {
+                                        handleSelectionLinkage(2);
+                                        if (anime.episodes !== null) {
+                                            UpdateUserAnimeEpisodeCount(anime.episodes);
+                                            setUserEpisodeCount(anime.episodes);
+                                        }
+                                        }}>Add to completed</li>
                                     {(isLinkingTo === 2) ? <div class="loader3 my-auto ml-2"></div> :""}
                                 </div>
                                 <div className="border-b border-c4 w-[50%]"></div>
@@ -585,7 +591,3 @@ function AnimeDetailItem ({anime}) {
 }
 
 export default AnimeDetailItem;
-
-
-
-// fix routing of null user and non admin user both fail to re-render the page one redirect

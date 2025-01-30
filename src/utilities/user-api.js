@@ -21,6 +21,10 @@ export function logOut() {
   return sendRequest(`${BASE_URL}/logout`, 'POST');
 }
 
+export function rememberUser(info) {
+  return sendRequest(`${BASE_URL}/remember`, 'POST', info);
+}
+
 //  user anime relation calls
 
 export function linkAnimeToUser(username, queryParameters) {
